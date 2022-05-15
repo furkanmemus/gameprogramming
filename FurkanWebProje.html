@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Country Flag Game</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Furkan Memus" />
+    <style>
+        body{
+             background-image: url("ulkebayraklari.png");
+        }
+    </style>
+</head>
+
+<body>
+    <div align="center" style="padding-top: 30px ;">
+        <canvas id="cizimPanel" style="background-color:rgb(12, 125, 159);" width="860" height="640"></canvas>
+    </div>
+
+    <script>
+        var seceneklerAll = [
+            "afghanistan",
+            "albania",
+            "algeria",
+            "angola",
+            "argentin",
+            "austral",
+            "austria",
+            "bangla",
+            "belarus",
+            "belgium",
+            "bolivia",
+            "bosnia",
+            "brazil",
+            "bulgaria",
+            "burma",
+            "cameroon",
+            "canada",
+            "chile",
+            "china",
+            "colombia",
+            "congo",
+            "costaric",
+            "croatia",
+            "cuba",
+            "czech",
+            "denmark",
+            "dominica",
+            "ecuador",
+            "egypt",
+            "elsalv",
+            "estonia",
+            "ethiopia",
+            "finland",
+            "france",
+            "germany",
+            "ghana",
+            "greece",
+            "guatemala",
+            "guyana",
+            "haiti",
+            "honduras",
+            "hungary",
+            "iceland",
+            "india",
+            "indones",
+            "iran",
+            "iraq",
+            "ireland",
+            "israel",
+            "italy",
+            "ivory",
+            "japan",
+            "kenya",
+            "latvia",
+            "lithuan",
+            "macedon",
+            "madagas",
+            "malawi",
+            "malaysia",
+            "mexico",
+            "moldova",
+            "montenegro",
+            "morocco",
+            "mozamb",
+            "netherland",
+            "newzealand",
+            "nicagua",
+            "niger",
+            "nigeria",
+            "nkorea",
+            "norway",
+            "pakistan",
+            "panama",
+            "paraguay",
+            "peru",
+            "philipp",
+            "poland",
+            "portugal",
+            "romania",
+            "russia",
+            "safrica",
+            "saudi",
+            "serbia",
+            "skorea",
+            "slovakia",
+            "slovenia",
+            "somalia",
+            "spain",
+            "sudan",
+            "suriname",
+            "sweden",
+            "switzlnd",
+            "taiwan",
+            "tanzania",
+            "thailand",
+            "tunisia",
+            "turkey",
+            "uganda",
+            "uk",
+            "ukraine",
+            "uruguay",
+            "usa",
+            "venezuel",
+            "vietnam",
+            "zambia",
+            "zimbabwe",
+
+        ];
+        var srcler = [
+            "flags/afghanistan.png",
+            "flags/albania.png",
+            "flags/algeria.png",
+            "flags/angola.png",
+            "flags/argentin.png",
+            "flags/austral.png",
+            "flags/austria.png",
+            "flags/bangla.png",
+            "flags/belarus.png",
+            "flags/belgium.png",
+            "flags/bolivia.png",
+            "flags/bosnia.png",
+            "flags/brazil.png",
+            "flags/bulgaria.png",
+            "flags/burma.png",
+            "flags/cameroon.png",
+            "flags/canada.png",
+            "flags/chile.png",
+            "flags/china.png",
+            "flags/colombia.png",
+            "flags/congo.png",
+            "flags/costaric.png",
+            "flags/croatia.png",
+            "flags/cuba.png",
+            "flags/czech.png",
+            "flags/denmark.png",
+            "flags/dominica.png",
+            "flags/ecuador.png",
+            "flags/egypt.png",
+            "flags/elsalv.png",
+            "flags/estonia.png",
+            "flags/ethiopia.png",
+            "flags/finland.png",
+            "flags/france.png",
+            "flags/germany.png",
+            "flags/ghana.png",
+            "flags/greece.png",
+            "flags/guatemala.png",
+            "flags/guyana.png",
+            "flags/haiti.png",
+            "flags/honduras.png",
+            "flags/hungary.png",
+            "flags/iceland.png",
+            "flags/india.png",
+            "flags/indones.png",
+            "flags/iran.png",
+            "flags/iraq.png",
+            "flags/ireland.png",
+            "flags/israel.png",
+            "flags/italy.png",
+            "flags/ivory.png",
+            "flags/japan.png",
+            "flags/kenya.png",
+            "flags/latvia.png",
+            "flags/lithuan.png",
+            "flags/macedon.png",
+            "flags/madagas.png",
+            "flags/malawi.png",
+            "flags/malaysia.png",
+            "flags/mexico.png",
+            "flags/moldova.png",
+            "flags/montenegro.png",
+            "flags/morocco.png",
+            "flags/mozamb.png",
+            "flags/netherland.png",
+            "flags/newzealand.png",
+            "flags/nicagua.png",
+            "flags/niger.png",
+            "flags/nigeria.png",
+            "flags/nkorea.png",
+            "flags/norway.png",
+            "flags/pakistan.png",
+            "flags/panama.png",
+            "flags/paraguay.png",
+            "flags/peru.png",
+            "flags/philipp.png",
+            "flags/poland.png",
+            "flags/portugal.png",
+            "flags/romania.png",
+            "flags/russia.png",
+            "flags/safrica.png",
+            "flags/saudi.png",
+            "flags/serbia.png",
+            "flags/skorea.png",
+            "flags/slovakia.png",
+            "flags/slovenia.png",
+            "flags/somalia.png",
+            "flags/spain.png",
+            "flags/sudan.png",
+            "flags/suriname.png",
+            "flags/sweden.png",
+            "flags/switzlnd.png",
+            "flags/taiwan.png",
+            "flags/tanzania.png",
+            "flags/thailand.png",
+            "flags/tunisia.png",
+            "flags/turkey.png",
+            "flags/uganda.png",
+            "flags/uk.png",
+            "flags/ukraine.png",
+            "flags/uruguay.png",
+            "flags/usa.png",
+            "flags/venezuel.png",
+            "flags/vietnam.png",
+            "flags/zambia.png",
+            "flags/zimbabwe.png",
+        ];
+        var bayraklarPNG = new Array(Image);
+
+        for (var i = 0; i < 106; i++) {
+            bayraklarPNG[i] = new Image();
+            bayraklarPNG[i].src = srcler[i];
+            console.log(bayraklarPNG[i].src);
+        }
+        var indis = 0;
+        var flag2=false;
+        var puan=0;
+        var cizimPanel = document.getElementById("cizimPanel");
+        cizimPanel_widht = 860;
+        cizimPanel_height = 640;
+        var context = cizimPanel.getContext("2d");
+        var secimler = [];
+        for (var i = 0; i < 4; i++) {
+            secimler[i] = new Image();
+            secimler[i].src = "secim.png";
+        }
+        var secenekler = [
+            seceneklerAll[4],
+            seceneklerAll[0],
+            seceneklerAll[1],
+            seceneklerAll[5]];
+        var seedRand = [indis];//0. elamani indis
+        //var bg=new Image();
+        //bg.src="backGround";
+        function cizimler() {
+            //context.drawImage(bg,0,0,bg.width,bg.height,0,0,cizimPanel_widht,cizimPanel_height);
+            context.fillStyle = "#000000";
+            context.font = "1000 20px cursive";   
+
+            context.clearRect(0, 0, cizimPanel_widht, cizimPanel_height);
+            context.drawImage(bayraklarPNG[indis], 0, 0, 300, 150, 300, 150, 300, 150);
+            context.drawImage(secimler[0], 0, 0, 600, 270, 250, 350, 300, 40);
+            context.drawImage(secimler[1], 0, 0, 600, 270, 250, 400, 300, 40);
+            context.drawImage(secimler[2], 0, 0, 600, 270, 250, 450, 300, 40);
+            context.drawImage(secimler[3], 0, 0, 600, 270, 250, 500, 300, 40);
+
+            context.fillText(secenekler[0], 365, 375);
+            context.fillText(secenekler[1], 365, 425);
+            context.fillText(secenekler[2], 365, 475);
+            context.fillText(secenekler[3], 365, 525);
+
+            context.fillText("Skorunuz: "+puan, 650, 600);
+            
+            if (indis == 106) {
+                indis = 0;
+            }
+
+            
+            requestAnimationFrame(cizimler);
+        }
+        document.addEventListener("click", tikla);
+
+        function tikla(event) {
+            var x = event.pageX,
+                y = event.pageY - 39;      
+
+
+            if (y >= 350 && y <= 390) {
+                console.log("button 1");
+                if (secenekler[0] == seceneklerAll[indis]) {
+                    flag2 = true;
+                    indis++;
+                    puan++;
+                    console.log("Doğru Cevap");
+                } else {
+                    console.log("Yanlis");
+                    alert("Oyun BittiSkorunuz: "+puan);
+                    location.reload();
+                    reset();
+                }
+            }
+            if (y >= 400 && y <= 440) {
+                console.log("button 2");
+                if (secenekler[1] == seceneklerAll[indis]) {
+                    flag2 = true;
+                    indis++;
+                    puan++;
+                    console.log("Doğru Cevap");
+                } else {
+                    console.log("Yanlis");
+                    alert("Oyun BittiSkorunuz: "+puan);
+                    location.reload();
+                    reset();
+                }
+            }
+            if (y >= 450 && y <= 490) {
+                console.log("button 3");
+                if (secenekler[2] == seceneklerAll[indis]) {
+                    flag2 = true;
+                    indis++;
+                    puan++;
+                    console.log("Doğru Cevap");
+                } else {
+                    console.log("Yanlis");
+                    alert("Oyun BittiSkorunuz: "+puan);
+                    location.reload();
+                    reset();
+                }
+            }
+            if (y >= 500 && y <= 540) {
+                console.log("button 4");
+                if (secenekler[3] == seceneklerAll[indis]) {
+                    flag2 = true;
+                    indis++;
+                    puan++;
+                    console.log("Doğru Cevap");
+                } else {
+                    console.log("Yanlis");
+                    alert("Oyun BittiSkorunuz: "+puan);
+                    location.reload();
+                    reset();
+                }
+            }
+
+            if (flag2) {
+
+                var i = Math.floor(Math.random() * 3 + 1);
+                secenekler[i] = seceneklerAll[indis];
+                for (var x = 0; x < 4; x++) {
+                    var j = Math.floor(Math.random() * 107);
+                    if (j == indis) {
+                        x--;
+                        continue;
+                    }
+                    if (i == x) {
+                        continue;
+                    }
+                    secenekler[x] = seceneklerAll[j];
+                }
+                flag2=false;
+            }
+
+
+
+        }
+        cizimler();
+    </script>
+</body>
+
+</html>
